@@ -11,6 +11,11 @@ const User = require('../models/userModel');
 router.get('/or', async (req, res) => {
   try {
     //write your code here for or operator
+    const users = await User.find({
+      $or: [{ age: 20 }, { username: 'admin' }],
+    });
+
+    res.status(200).json(users);
   } catch (error) {
     res.status(404).send(error);
   }
@@ -20,6 +25,11 @@ router.get('/or', async (req, res) => {
 router.get('/and', async (req, res) => {
   try {
     //write your code here for and operator
+    const users = await User.find({
+      $and: [{ age: 20 }, { username: 'admin' }],
+    });
+
+    res.status(200).json(users);
   } catch (error) {
     res.status(404).send(error);
   }
@@ -29,6 +39,11 @@ router.get('/and', async (req, res) => {
 router.get('/not', async (req, res) => {
   try {
     //write your code here for not operator
+    const users = await User.find({
+      age: { $not: { $gt: 30 } },
+    });
+
+    res.status(200).json(users);
   } catch (error) {
     res.status(404).send(error);
   }
@@ -38,6 +53,11 @@ router.get('/not', async (req, res) => {
 router.get('/nor', async (req, res) => {
   try {
     //write your code here for nor operator
+    const users = await User.find({
+      $nor: [{ age: 20 }, { username: 'admin' }],
+    });
+
+    res.status(200).json(users);
   } catch (error) {
     res.status(404).send(error);
   }
